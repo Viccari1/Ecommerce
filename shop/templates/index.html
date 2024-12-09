@@ -1,0 +1,68 @@
+{% load permission_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Loja</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="{% url 'index' %}" class="text-xl font-bold text-gray-800">Projeto Loja</a>
+            <div class="flex items-center">
+                {% if user.is_authenticated %}
+                    <div class="relative">
+                        <button class="text-gray-800 focus:outline-none">
+                            Olá, {{ user.username }}!
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden group-hover:block">
+                            {% if user|has_role:'vendedor' %}
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Loja</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Ver pedidos recebidos</a>
+                        
+                            {% elif user|has_role:'cliente' %}
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Ver carrinho</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Ver histórico de comprar</a>
+                            {% endif %}      
+                            <a href="{% url 'logout' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="text-blue-500 ml-4">Login</a>
+                    <a href="{% url 'register' %}" class="text-blue-500 ml-4">Registro</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800">Bem-vindo ao Projeto Loja</h1>
+        <p class="mt-4 text-gray-600">Aqui você encontra os melhores produtos!</p>
+    </div>
+    <div class="container mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for produto in produtos %}
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <img src="{{ produto.imagemprincipal }}" alt="{{ produto.nome }}" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold text-gray-800">{{ produto.nome }}</h2>
+                    <p class="mt-2 text-gray-600">{{ produto.descricao }}</p>
+                    <p class="mt-2 text-gray-800 font-semibold">{{ produto.preco }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-gray-600">Nenhum produto encontrado. Se isso parecer estranho, contate o Administrador da página.</p>
+        {% endfor %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userButton = document.querySelector('button.text-gray-800');
+            const dropdownMenu = userButton.nextElementSibling;
+
+            userButton.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
