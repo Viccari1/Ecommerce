@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ produto.nome }}</title>
-</head>
-<body>
-    <h1>{{ produto.nome }}</h1>
-    <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
-    <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
-    <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
-    <p><strong>Disponibilidade:</strong> {{ produto.disponibilidade }}</p>
-    <p><strong>Data de Adição:</strong> {{ produto.data_adicao }}</p>
-    <img src="{{ produto.imagemprincipal.url }}" alt="{{ produto.nome }}">
-</body>
-</html>
+{% extends 'base/base.html' %}
+
+{% block titulo %} {{ produto.nome }} {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ produto.imagemprincipal.url }}" alt="{{ produto.nome }}" class="img-fluid rounded shadow-sm">
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4">{{ produto.nome }}</h1>
+            <p class="lead"><strong>Descrição:</strong> {{ produto.descricao }}</p>
+            <p><strong>Preço:</strong> <span class="text-success">R$ {{ produto.preco }}</span></p>
+            <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
+            <p><strong>Disponibilidade:</strong> {{ produto.disponibilidade }}</p>
+            <p><strong>Data de Adição:</strong> {{ produto.data_adicao }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Add any JavaScript you need for this page here
+    </script>
+{% endblock %}

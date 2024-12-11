@@ -4,5 +4,5 @@ from .models import Loja
 from rolepermissions.roles import assign_role
 
 # Create your tests here.
-loja = Loja.objects.get(dono = User.objects.get(username = 'viccari_loja2'))
+loja = Loja.objects.get(dono = User.objects.get(username = 'viccari_loja'))
 loja.delete()

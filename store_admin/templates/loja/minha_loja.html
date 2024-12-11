@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes da Loja</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <header class="bg-primary text-white text-center py-3">
-        <h1>Detalhes da Loja</h1>
-    </header>
+{% extends 'base/base.html' %}
+
+{% block titulo %} Detalhes da loja {% endblock %}
+
+{% block content %}
     <main class="container mt-4">
         <section class="mb-4">
             <div class="card bg-light mx-auto" style="max-width: 800px;">
@@ -53,11 +44,10 @@
             </div>
         </section>
     </main>
-    <footer class="bg-light text-center py-3 mt-4">
-        <p>&copy; 2023 Projeto Loja</p>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Add any JavaScript you need for this page here
+    </script>
+{% endblock %}

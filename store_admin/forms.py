@@ -13,12 +13,21 @@ class ProdutoForm(forms.ModelForm):
             'estoque': 'Estoque',
             'imagemprincipal': 'Imagem principal',
         }
+        widgets = {
+            'descricao': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'preco': forms.NumberInput(attrs={'class': 'form-control'}),
+            'estoque': forms.NumberInput(attrs={'class': 'form-control'}),
+            'imagemprincipal': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
 class ImagemProdutoForm(forms.ModelForm):
     class Meta:
         model = ImagemProduto
         fields = ['imagem']
-    imagem = forms.ImageField(widget=ClearableFileInput(), required=False)
+        widgets = {
+            'imagem': ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
 class LojaForm(forms.ModelForm):
     class Meta:
@@ -32,7 +41,10 @@ class LojaForm(forms.ModelForm):
             'logo': 'Logo',
         }
         widgets = {
-            'nome': forms.TextInput(attrs={'autofocus': True}),
-            'descricao': forms.Textarea(attrs={'rows': 5}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}),
+            'endereco': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'logo': ClearableFileInput(attrs={'class': 'form-control'}),
         }
     logo = forms.ImageField(widget=ClearableFileInput(), required=False)
