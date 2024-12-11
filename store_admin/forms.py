@@ -5,14 +5,20 @@ from django.forms import ClearableFileInput
 class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ['nome', 'descricao', 'preco', 'loja', 'estoque', 'vendidos', 'imagemprincipal', 'imagens', 'avaliacao']
-    
-    imagens = forms.ImageField(widget=ClearableFileInput(), required=False)
+        fields = ['nome', 'descricao', 'preco', 'estoque', 'imagemprincipal']
+        labels = {
+            'nome': 'Nome do produto',
+            'descricao': 'Descrição',
+            'preco': 'Preço',
+            'estoque': 'Estoque',
+            'imagemprincipal': 'Imagem principal',
+        }
 
 class ImagemProdutoForm(forms.ModelForm):
     class Meta:
         model = ImagemProduto
         fields = ['imagem']
+    imagem = forms.ImageField(widget=ClearableFileInput(), required=False)
 
 class LojaForm(forms.ModelForm):
     class Meta:
@@ -29,4 +35,4 @@ class LojaForm(forms.ModelForm):
             'nome': forms.TextInput(attrs={'autofocus': True}),
             'descricao': forms.Textarea(attrs={'rows': 5}),
         }
-        logo = forms.ImageField(widget=ClearableFileInput(), required=False)
+    logo = forms.ImageField(widget=ClearableFileInput(), required=False)

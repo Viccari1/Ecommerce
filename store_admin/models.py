@@ -28,7 +28,7 @@ class Produto(models.Model):
     loja = models.ForeignKey(Loja, on_delete=models.CASCADE)
     estoque = models.IntegerField()
     vendidos = models.IntegerField(default=0)
-    imagemprincipal = models.ImageField(upload_to='produtos')
+    imagemprincipal = models.ImageField(upload_to='produtos', max_length=255, null=True)
     imagens = models.ManyToManyField(ImagemProduto, blank=True)
     avaliacao = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     criado_em = models.DateTimeField(auto_now_add=True)

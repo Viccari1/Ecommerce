@@ -3,6 +3,7 @@ from .forms import ProdutoForm, ImagemProdutoForm, LojaForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from users.models import User
+from .models import Produto
 from store_admin.models import Loja
 from rolepermissions.checkers import has_permission, has_role
 
@@ -15,8 +16,8 @@ def minha_loja(request):
     if not Loja.objects.filter(dono=request.user).exists():
         return redirect('create_store')
     loja = Loja.objects.get(dono=request.user)
-    print(loja.logo.url)
-    context = {'loja': loja}
+    produtos = Produto.objects.filter(loja=loja)
+    context = {'loja': loja, 'produtos': produtos}
     return render(request, 'loja/minha_loja.html', context)
 
 @login_required
@@ -37,7 +38,7 @@ def create_store(request):
             loja.dono = request.user
             loja.email = request.user.email
             loja.save()
-            
+
             return redirect('index')
     
     context = {'form': form}
@@ -47,10 +48,13 @@ def add_product(request):
     if request.method != 'POST':
         form = ProdutoForm()
     else:
-        form = ProdutoForm(request.POST)
+        form = ProdutoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return render(request, 'loja/index.html')
+            produto = form.save(commit=False)
+            produto.loja = Loja.objects.get(dono=request.user)
+            produto.save()
+            
+            return redirect('minha_loja')
     
     context = {'form': form}
-    return render(request, 'store/add_product.html', context)
+    return render(request, 'loja/add_product.html', context)
