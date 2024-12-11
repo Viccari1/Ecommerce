@@ -17,4 +17,16 @@ class ImagemProdutoForm(forms.ModelForm):
 class LojaForm(forms.ModelForm):
     class Meta:
         model = Loja
-        fields = ['nome', 'dono']
+        fields = ['nome', 'endereco', 'telefone', 'descricao', 'logo']
+        labels = {
+            'nome': 'Nome da loja',
+            'endereco': 'Endereço',
+            'telefone': 'Telefone',
+            'descricao': 'Descrição',
+            'logo': 'Logo',
+        }
+        widgets = {
+            'nome': forms.TextInput(attrs={'autofocus': True}),
+            'descricao': forms.Textarea(attrs={'rows': 5}),
+        }
+        logo = forms.ImageField(widget=ClearableFileInput(), required=False)

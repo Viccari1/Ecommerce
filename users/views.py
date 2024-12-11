@@ -31,6 +31,8 @@ def register(request):
             assign_role(user, form.cleaned_data.get('role'))
             authenticated_user = authenticate(username=user.username, password=request.POST['password1'])
             login(request, authenticated_user)
+            if user.role == 'vendedor':
+                return redirect('create_store')
             return redirect('index')  # Redirecione para a página inicial ou outra página
         
     context = {'form': form}

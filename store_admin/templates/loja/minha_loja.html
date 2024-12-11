@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Loja</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Detalhes da Loja</h1>
+    </header>
+    <main>
+        <section>
+            <h2>{{ loja.nome }}</h2>
+            <p><strong>Endereço:</strong> {{ loja.endereco }}</p>
+            <p><strong>Telefone:</strong> {{ loja.telefone }}</p>
+            <p><strong>Email:</strong> {{ loja.email }}</p>
+            <p><strong>Descrição:</strong> {{ loja.descricao }}</p>
+            <img src="{{ loja.logo.url }}" alt="{{ loja.nome }}">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Projeto Loja</p>
+    </footer>
+</body>
+</html>
