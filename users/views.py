@@ -6,15 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
+from core.utils import redirect_if_logged_in
 
 # Create your views here.
-def redirect_if_logged_in(view_func):
-    def _wrapped_view_func(request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return Http404()  # Redirecione para a página inicial ou outra página
-        return view_func(request, *args, **kwargs)
-    return _wrapped_view_func
-
 @redirect_if_logged_in
 def register(request):
     if request.method != 'POST':
@@ -38,6 +32,7 @@ def register(request):
     context = {'form': form}
     return render(request, 'users/criar_usuario.html', context)
 
+@redirect_if_logged_in
 def login_view(request):
     if request.method != 'POST':
         form = LoginForm()

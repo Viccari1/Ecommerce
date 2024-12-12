@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import User
-
+from .validators import nao_negativo, valor_acima_4_digitos
 # Create your models here.
 class Loja(models.Model):
     nome = models.CharField(max_length=100, unique=True)
@@ -24,9 +24,9 @@ class ImagemProduto(models.Model):
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
-    preco = models.DecimalField(max_digits=10, decimal_places=2)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, validators=[nao_negativo, valor_acima_4_digitos])
     loja = models.ForeignKey(Loja, on_delete=models.CASCADE)
-    estoque = models.IntegerField()
+    estoque = models.IntegerField(default=0, validators=[nao_negativo, valor_acima_4_digitos])
     vendidos = models.IntegerField(default=0)
     imagemprincipal = models.ImageField(upload_to='produtos', max_length=255, null=True)
     imagens = models.ManyToManyField(ImagemProduto, blank=True)

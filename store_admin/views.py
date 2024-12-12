@@ -44,6 +44,7 @@ def create_store(request):
     context = {'form': form}
     return render(request, 'loja/create_store.html', context)
 
+@login_required
 def add_product(request):
     if request.method != 'POST':
         form = ProdutoForm()
@@ -58,3 +59,6 @@ def add_product(request):
     
     context = {'form': form}
     return render(request, 'loja/add_product.html', context)
+
+def edit_product(request, id):
+    pass
