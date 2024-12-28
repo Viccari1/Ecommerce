@@ -46,5 +46,5 @@ Para acessar o site, abra o navegador e acesse: http://127.0.0.1:8000/
 Este projeto está licenciado sob uma licença Copyright, todos os direitos reservados para Andrey Viccari.
 
 ## Contato
-Email: viccariandrey@gmail.com
-Linkedin: [Andrey Viccari] (https://www.linkedin.com/in/andrey-viccari-3a2356290/)
+Email: viccariandrey@gmail.com <br>
+Linkedin: <a href="https://www.linkedin.com/in/andrey-viccari-3a2356290/">Andrey Viccari</a>
