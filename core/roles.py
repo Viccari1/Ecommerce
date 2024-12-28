@@ -1,7 +1,7 @@
 from rolepermissions.roles import AbstractUserRole
 
-class Cliente(AbstractUserRole):
-    role_name = 'cliente'
+class Client(AbstractUserRole):
+    role_name = 'client'
     available_permissions = {
         'view_product': True,
         'add_to_cart': True,
@@ -10,8 +10,8 @@ class Cliente(AbstractUserRole):
         'send_reviews': True,
     }
 
-class Vendedor(AbstractUserRole):
-    role_name = 'vendedor'
+class Seller(AbstractUserRole):
+    role_name = 'seller'
     available_permissions = {
         'create_store': True,
         'view_orders': True,

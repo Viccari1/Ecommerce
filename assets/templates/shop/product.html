@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %} {{ product.name }} {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="img-fluid rounded shadow-sm">
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4">{{ product.name }}</h1>
+            <p class="lead"><strong>Descrição:</strong> {{ product.description }}</p>
+            <p><strong>Preço:</strong> <span class="text-success">R$ {{ product.price }}</span></p>
+            <p><strong>Categoria:</strong> {{ product.categoria.nome }}</p>
+            <p><strong>Disponibilidade:</strong> {{ product.stock }}</p>
+            <p><strong>Data de Adição:</strong> {{ product.data_adicao }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Add any JavaScript you need for this page here
+    </script>
+{% endblock %}

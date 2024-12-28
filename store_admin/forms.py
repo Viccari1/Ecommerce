@@ -1,50 +1,50 @@
 from django import forms
-from .models import Produto, ImagemProduto, Loja
+from .models import Product, ProductImage, Store
 from django.forms import ClearableFileInput
 
-class ProdutoForm(forms.ModelForm):
+class ProductForm(forms.ModelForm):
     class Meta:
-        model = Produto
-        fields = ['nome', 'descricao', 'preco', 'estoque', 'imagemprincipal']
+        model = Product
+        fields = ['name', 'description', 'price', 'stock', 'main_image']
         labels = {
-            'nome': 'Nome do produto',
-            'descricao': 'Descrição',
-            'preco': 'Preço',
-            'estoque': 'Estoque',
-            'imagemprincipal': 'Imagem principal',
+            'name': 'Nome do produto',
+            'description': 'Descrição',
+            'price': 'Preço',
+            'stock': 'Estoque',
+            'main_image': 'Imagem principal',
         }
         widgets = {
-            'descricao': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
-            'preco': forms.NumberInput(attrs={'class': 'form-control'}),
-            'estoque': forms.NumberInput(attrs={'class': 'form-control'}),
-            'imagemprincipal': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'stock': forms.NumberInput(attrs={'class': 'form-control'}),
+            'main_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
-class ImagemProdutoForm(forms.ModelForm):
+class ProductImageForm(forms.ModelForm):
     class Meta:
-        model = ImagemProduto
-        fields = ['imagem']
+        model = ProductImage
+        fields = ['image']
         widgets = {
-            'imagem': ClearableFileInput(attrs={'class': 'form-control'}),
+            'image': ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
-class LojaForm(forms.ModelForm):
+class StoreForm(forms.ModelForm):
     class Meta:
-        model = Loja
-        fields = ['nome', 'endereco', 'telefone', 'descricao', 'logo']
+        model = Store
+        fields = ['name', 'address', 'phone', 'description', 'logo']
         labels = {
-            'nome': 'Nome da loja',
-            'endereco': 'Endereço',
-            'telefone': 'Telefone',
-            'descricao': 'Descrição',
+            'name': 'Nome da loja',
+            'address': 'Endereço',
+            'phone': 'Telefone',
+            'description': 'Descrição',
             'logo': 'Logo',
         }
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}),
-            'endereco': forms.TextInput(attrs={'class': 'form-control'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control'}),
-            'descricao': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
             'logo': ClearableFileInput(attrs={'class': 'form-control'}),
         }
     logo = forms.ImageField(widget=ClearableFileInput(), required=False)

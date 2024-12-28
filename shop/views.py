@@ -1,20 +1,16 @@
 from django.shortcuts import render
-from store_admin.models import Produto
+from store_admin.models import Product
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseNotFound
 
 # Create your views here.
 def index(request):
-    # carrinho = request.session.get('carrinho', {})
-    # request.session.set()
-    pass
-    context = {'produtos': Produto.objects.all()}
-    return render(request, 'index.html', context)
+    context = {'products': Product.objects.all()}
+    return render(request, 'shop/index.html', context)
 
-def produto(request, id):
+def product(request, id):
     try:
-        produto = Produto.objects.get(id=id)
+        product = Product.objects.get(id=id)
     except ObjectDoesNotExist:
         raise ObjectDoesNotExist('Produto não encontrado!')
-    context = {'produto': produto}
-    return render(request, 'produto.html', context)
+    context = {'product': product}
+    return render(request, 'shop/product.html', context)

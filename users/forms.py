@@ -27,7 +27,7 @@ class UserForm(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
     role = forms.ChoiceField(
-        choices=[('cliente', 'Cliente'), ('vendedor', 'Vendedor')], initial='cliente',
+        choices=[('client', 'Cliente'), ('seller', 'Vendedor')], initial='client',
         widget=forms.RadioSelect(attrs={'class': 'input-group-pretend'}),
         label="Qual o tipo de conta você deseja criar? (ESTÁ OPÇÃO NÃO PODE SER MUDADA FUTURAMENTE!)")
     

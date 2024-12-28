@@ -25,10 +25,10 @@
                                 Olá, {{ user.username }}!
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                {% if user|has_role:'vendedor' %}
-                                    <a href="{% url 'minha_loja' %}" class="dropdown-item">Minha loja</a>
+                                {% if user|has_role:'seller' %}
+                                    <a href="{% url 'my_store' %}" class="dropdown-item">Minha loja</a>
                                     <a href="#" class="dropdown-item">Ver pedidos recebidos</a>
-                                {% elif user|has_role:'cliente' %}
+                                {% elif user|has_role:'client' %}
                                     <a href="#" class="dropdown-item">Ver carrinho</a>
                                     <a href="#" class="dropdown-item">Ver histórico de compras</a>
                                 {% endif %}

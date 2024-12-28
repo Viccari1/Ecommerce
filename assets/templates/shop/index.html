@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block titulo %} Projeto Notas {% endblock %}
+{% block titulo %} Lojinha {% endblock %}
 
 {% block content %}
     <div class="container mt-5">
@@ -8,16 +8,16 @@
         <p class="lead">Aqui você encontra os melhores produtos!</p>
     </div>
     <div class="container mt-5 row">
-        {% for produto in produtos %}
+        {% for product in products %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                <a href="{% url 'produto' produto.id %}" style="style: inherit">
-                    <div class="card h-100">
-                        <img src="{{ produto.imagemprincipal.url }}" alt="{{ produto.nome }}" class="card-img-top">
+                <a href="{% url 'product' product.id %}" style="style: inherit">
+                    <div class="card h-100 shadow-sm bg-white rounded border-primary">
+                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">{{ produto.nome }}</h5>
-                            <p class="card-text">{{ produto.descricao }}</p>
-                            <p class="card-text font-weight-bold">{{ produto.preco }}</p>
-                            <p class="card-text">{{ produto.loja }}</p>
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text font-weight-bold">{{ product.price }}</p>
+                            <p class="card-text">{{ product.store }}</p>
                         </div>
                     </div>
                 </a>
