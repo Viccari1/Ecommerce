@@ -1,35 +1,39 @@
 from django.db import models
+from users.models import User
+from .validators import non_negative, above_4_digits
 
 # Create your models here.
-class Produto(models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.TextField()
-    preco = models.DecimalField(max_digits=10, decimal_places=2)
-    loja = models.ForeignKey('Loja', on_delete=models.CASCADE)
-    estoque = models.IntegerField()
-    vendidos = models.IntegerField(default=0)
-    imagemprincipal = models.ImageField(upload_to='produtos')
-    imagens = models.ManyToManyField('ImagemProduto', blank=True)
-    avaliacao = models.DecimalField(max_digits=2, decimal_places=1, default=0)
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
+class Store(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField(unique=True)
+    description = models.TextField(max_length=500)
+    logo = models.ImageField(upload_to='logos', max_length=255, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.nome
+        return self.name
     
-class ImagemProduto(models.Model):
-    imagem = models.ImageField(upload_to='produtos')
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to='products')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[non_negative, above_4_digits])
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    stock = models.IntegerField(default=0, validators=[non_negative, above_4_digits])
+    sold = models.IntegerField(default=0)
+    main_image = models.ImageField(upload_to='products', max_length=255, null=True)
+    images = models.ManyToManyField(ProductImage, blank=True)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.produto.nome
-
-class Loja(models.Model):
-    nome = models.CharField(max_length=100)
-    dono = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.nome
+        return self.name

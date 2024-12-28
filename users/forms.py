@@ -14,16 +14,29 @@ class UserForm(UserCreationForm):
             'cpf': 'CPF',
             'email': 'Email',
             'phone': 'Telefone',
-
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'role': forms.RadioSelect(attrs={'class': 'form-check-input'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control-password', 'placeholder': 'Senha'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
     role = forms.ChoiceField(
-        choices=[('cliente', 'Cliente'), ('vendedor', 'Vendedor')], initial='cliente',
-        widget=forms.RadioSelect,
+        choices=[('client', 'Cliente'), ('seller', 'Vendedor')], initial='client',
+        widget=forms.RadioSelect(attrs={'class': 'input-group-pretend'}),
         label="Qual o tipo de conta você deseja criar? (ESTÁ OPÇÃO NÃO PODE SER MUDADA FUTURAMENTE!)")
+    
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirme sua senha', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 class LoginForm(forms.Form):
-    email = forms.CharField(label='Email', widget=forms.EmailInput(attrs={'autofocus': True}))
-    password = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    email = forms.CharField(label='Email', widget=forms.EmailInput(attrs={'autofocus': True, 'class': 'form-control'}))
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clear_email(self):
         email = self.cleaned_data.get('email')
@@ -33,4 +46,3 @@ class LoginForm(forms.Form):
         except get_user_model().DoesNotExist:
             raise forms.ValidationError('Email não cadastrado!')
         return email
-
