@@ -15,6 +15,10 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    if (sys.argv[1] == 'gerar_chave'):
+        from gerar_chave import main
+        main()
+        return
     execute_from_command_line(sys.argv)
 
 

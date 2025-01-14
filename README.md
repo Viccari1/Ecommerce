@@ -34,7 +34,14 @@ Este é um projeto de Ecommerce (Comércio virtual, ou Loja virtual) feito com P
     python manage.py migrate
     ```
 
-6. Inicie o servidor local:
+6. Adicione arquivo .env na pasta Ecommerce/core/:
+    ```bash
+    # Caso você não tenha a chave, execute:
+    python manage.py gerar_chave
+    SECRET_KEY = [ADICIONE A CHAVE SECRETA]
+    ```
+
+7. Inicie o servidor local:
     ```bash
     python manage.py runserver
     ```

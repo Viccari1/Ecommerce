@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %} 
+{% block titulo %} Carrinho de Compras {% endblock %} 
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Seu Carrinho</h2>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">
+            <strong>Preço:</strong> R$ {{ product.price }}
+          </p>
+          <p class="card-text">
+            <strong>Quantidade:</strong> {{ product.quantity }}
+          </p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button
+            class="btn btn-danger"
+            onclick="removeFromCart({{ product.id }})"
+          >
+            Remover do Carrinho
+          </button>
+          <button class="btn btn-primary" onclick="addToCart({{ product.id }})">
+            Adicionar Mais
+          </button>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <p class="text-center">Seu carrinho está vazio.</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="mt-4">
+    <a href="#" class="btn btn-success btn-lg">
+      Finalizar Compra
+    </a>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  // Add any JavaScript you need for this page here
+</script>
+{% endblock %}

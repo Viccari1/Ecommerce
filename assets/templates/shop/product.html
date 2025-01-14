@@ -11,15 +11,27 @@
             <h1 class="display-4">{{ product.name }}</h1>
             <p class="lead"><strong>Descrição:</strong> {{ product.description }}</p>
             <p><strong>Preço:</strong> <span class="text-success">R$ {{ product.price }}</span></p>
-            <p><strong>Categoria:</strong> {{ product.categoria.nome }}</p>
-            <p><strong>Disponibilidade:</strong> {{ product.stock }}</p>
-            <p><strong>Data de Adição:</strong> {{ product.data_adicao }}</p>
+            <p><strong>Disponível:</strong> {{ product.stock }}</p>
+            <p><strong>Vendidos:</strong> {{ product.sold }}</p>
+            <p><strong>Avaliação:</strong> {{ product.rating }}</p>
+            <p><strong>Vendido por:</strong> <a href="{% url 'store' product.store.id %}">{{ product.store }}</a></p>
+
+            <button onClick="add_to_cart()" class="btn btn-primary btn-block btn-lg">Adicionar ao carrinho</button>
         </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
+        function add_to_cart() {
+            var option = confirm("Tem certeza que deseja adicionar este produto ao carrinho?");
+            if (option == true) {
+                window.location = "{% url 'add_cart' product.id %}";
+            }
+            else {
+                alert("Operação cancelada.");
+            }
+        }
         // Add any JavaScript you need for this page here
     </script>
 {% endblock %}
